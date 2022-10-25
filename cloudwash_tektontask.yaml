@@ -28,7 +28,7 @@ spec:
         cd /opt/app-root/src/cloudwash 
 
         curl
-        https://gist.githubusercontent.com/psrna/384804e23d7a594ea5c972c0bdce6ad0/raw/7ec75fafc795f86928259c68b1df85b082941cc9/rhdeveloper-cloudwash-settings.yaml
+        https://raw.githubusercontent.com/psrna/developer-osd-aws-cleanup/main/rhdeveloper-cloudwash-settings.yaml
         | envsubst > settings.yaml
 
         swach aws --all 
