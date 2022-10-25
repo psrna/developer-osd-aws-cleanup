@@ -1,0 +1,37 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: run-cloudwash
+  namespace: appstudio-qe
+spec:
+  params:
+    - name: appName
+      type: string
+  steps:
+    - env:
+        - name: AWS_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              key: awsaccesskey
+              name: developer-osd-cloudwash
+        - name: AWS_SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              key: awssecretkey
+              name: developer-osd-cloudwash
+      image: quay.io/redhatqe/cloudwash
+      name: ''
+      resources: {}
+      script: >
+        #!/bin/sh 
+
+        cd /opt/app-root/src/cloudwash 
+
+        curl
+        https://gist.githubusercontent.com/psrna/384804e23d7a594ea5c972c0bdce6ad0/raw/7ec75fafc795f86928259c68b1df85b082941cc9/rhdeveloper-cloudwash-settings.yaml
+        | envsubst > settings.yaml
+
+        swach aws --all 
+  workspaces:
+    - mountPath: /workspace/output
+      name: developer-osd-aws-cleanup

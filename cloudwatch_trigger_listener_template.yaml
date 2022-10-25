@@ -1,0 +1,17 @@
+apiVersion: triggers.tekton.dev/v1alpha1
+kind: TriggerTemplate
+metadata:
+  name: developer-osd-aws-cleanup-trigger-template
+  namespace: appstudio-qe
+spec: 
+  resourcetemplates:
+   - apiVersion: tekton.dev/v1beta1
+     kind: PipelineRun
+     metadata:
+       generateName: developer-osd-aws-cleanup-
+     spec:
+       pipelineRef:
+         name: developer-osd-aws-cleanup
+       workspaces:
+       - emptyDir: {}
+         name: developer-osd-aws-cleanup

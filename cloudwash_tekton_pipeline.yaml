@@ -1,0 +1,19 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: developer-osd-aws-cleanup
+  namespace: appstudio-qe
+spec:
+  tasks:
+    - name: run-cloudwash
+      params:
+        - name: appName
+          value: swash
+      taskRef:
+        kind: Task
+        name: run-cloudwash
+      workspaces:
+        - name: developer-osd-aws-cleanup
+          workspace: developer-osd-aws-cleanup
+  workspaces:
+    - name: developer-osd-aws-cleanup

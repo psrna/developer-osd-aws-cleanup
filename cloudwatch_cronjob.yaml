@@ -1,0 +1,16 @@
+apiVersion: batch/v1
+ kind: CronJob
+ metadata:
+   name: run-cloudwash-rh-developer-osd
+   namespace: appstudio-qe
+ spec:
+   schedule: "@daily" 
+   jobTemplate:
+     spec:
+       template:
+         spec:
+           containers:
+           - name: trigger
+             image: curlimages/curl
+             args: ["curl", "-X", "POST", "--data", "{}", "el-developer-osd-aws-cleanup-trigger-listener.appstudio-qe.svc.cluster.local:8080"]
+           restartPolicy: Never

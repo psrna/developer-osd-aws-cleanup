@@ -1,0 +1,11 @@
+apiVersion: triggers.tekton.dev/v1alpha1
+ kind: EventListener
+ metadata:
+   name: developer-osd-aws-cleanup-trigger-listener
+   namespace: appstudio-qe
+ spec:
+   serviceAccountName: pipeline
+   triggers:
+     - name: cron-trig
+       template:
+         ref: developer-osd-aws-cleanup-trigger-template

@@ -1,0 +1,9 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  creationTimestamp: null
+  generateName: developer-osd-aws-cleanup-pipeline-run
+spec:
+  serviceAccountName: pipeline
+  pipelineRef:
+    name: developer-osd-aws-cleanup
